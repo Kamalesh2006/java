@@ -1,0 +1,63 @@
+package com.kamalesh;
+import java.util.ListIterator;
+import java.util.*;
+class UrlDatabase{
+    int uniqueShortKey;
+    String url;
+    int count;
+    UrlDatabase(int uniqueShortKey, String url,int count){
+        this.uniqueShortKey=uniqueShortKey;
+        this.url= url;
+        this.count=count;
+    }
+}
+public class Practice{
+    public static void main(String[] args) {
+        int uniqueShortKey=1;
+        ArrayList<UrlDatabase> u = new ArrayList<UrlDatabase>();
+        while(true){
+        	System.out.println("Commands: \n\tstoreurl\n\tget\n\tcount\n\tlist\n\texits");
+            Scanner sh = new Scanner(System.in);
+            String input = sh.nextLine();
+            if(input.equals("exit")){
+                break;
+            }
+            String[] s = input.split(" ");
+            if(s[0].equals("storeurl")){
+                u.add(new UrlDatabase(uniqueShortKey,s[1],0));
+            }
+            else if(s[0].equals("get")){
+                ListIterator<UrlDatabase> l = u.listIterator();
+                while(l.hasNext()){
+                    UrlDatabase temp = l.next();
+                    if(temp.url.equals(s[1])){
+                        temp.count++;
+                        System.out.println(temp.uniqueShortKey);
+                        break;
+                    }
+                    
+                }
+            }
+            else if(s[0].equals("count")){
+                ListIterator<UrlDatabase> l = u.listIterator();
+                while(l.hasNext()){
+                    UrlDatabase temp = l.next();
+                    if(temp.url.equals(s[1])){
+                        System.out.println(temp.count);
+                    }
+                }
+            }
+            else if(s[0].equals("list")){
+                ListIterator<UrlDatabase> l = u.listIterator();
+                while(l.hasNext()){
+                    UrlDatabase temp = l.next();
+                    System.out.println(temp.uniqueShortKey + " " + temp.url+ " "+ temp.count);
+                }
+            }
+            uniqueShortKey++;
+        }
+        
+
+
+    }
+}
